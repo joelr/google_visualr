@@ -63,6 +63,7 @@ module GoogleVisualr
     def to_js(element_id)
       js =  ""
       js << "\n<script type='text/javascript'>"
+      js << load_lib
       js << draw_js(element_id)
       js << load_js(element_id)
       js << "\n</script>"
@@ -73,12 +74,13 @@ module GoogleVisualr
     #
     # Parameters:
     #  *div_id            [Required] The ID of the DIV element that the Google Chart should be rendered in.
-    def load_js(element_id)
+    def load_lib
       language_opt = ", language: '#{language}'" if language
-
-      "\n  google.load('visualization', '#{version}', {packages: ['#{package_name}']#{language_opt}}); \n
-      google.charts.setOnLoadCallback(#{chart_function_name(element_id)});
-      "
+      "\ngoogle.load('visualization', '#{version}', {packages: ['#{package_name}']#{language_opt}}); "
+    end
+  
+    def load_js(element_id)
+      "\ngoogle.charts.setOnLoadCallback(#{chart_function_name(element_id)});"
     end
 
     # Generates JavaScript function for rendering the chart.
