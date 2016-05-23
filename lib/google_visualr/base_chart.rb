@@ -63,8 +63,8 @@ module GoogleVisualr
     def to_js(element_id)
       js =  ""
       js << "\n<script type='text/javascript'>"
-      js << load_js(element_id)
       js << draw_js(element_id)
+      js << load_js(element_id)
       js << "\n</script>"
       js
     end
